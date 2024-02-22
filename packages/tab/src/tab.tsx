@@ -32,14 +32,14 @@ import {
   getCurrentInstance,
   onMounted,
   onUpdated,
-  provide,
+  // provide,
   ref,
   VNode,
 } from 'vue';
 
 import { usePrefix } from '@bkui-vue/config-provider';
 
-import { tabKey } from './common';
+// import { tabKey } from './common';
 import { SortTypeEnum, tabProps } from './props';
 import TabNav from './tab-nav';
 
@@ -95,12 +95,6 @@ export default defineComponent({
         }
       }
     };
-
-    provide(tabKey, {
-      register() {
-        console.log('asdas');
-      },
-    });
 
     onMounted(() => {
       setPanelInstances();
