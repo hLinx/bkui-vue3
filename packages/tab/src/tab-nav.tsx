@@ -30,7 +30,7 @@ import { usePrefix } from '@bkui-vue/config-provider';
 import { bkTooltips } from '@bkui-vue/directives';
 import { Close, Plus } from '@bkui-vue/icon/';
 
-import { PositionEnum, tabNavProps, TabTypeEnum } from './props';
+import { tabNavProps, TabTypeEnum } from './props';
 
 export default defineComponent({
   name: 'TabNav',
@@ -41,34 +41,24 @@ export default defineComponent({
   setup(props: Record<string, any>) {
     const activeRef = ref<HTMLElement>(null);
     const activeBarStyle = computed<CSSProperties>(() => {
-      const initStyle: CSSProperties = { width: 0, height: 0, bottom: 0, left: 0 };
+      const initStyle: CSSProperties = {
+        width: 0,
+        height: 0,
+        bottom: 0,
+        left: 0,
+      };
       if (!activeRef.value) {
         return initStyle;
       }
-      if ([PositionEnum.LEFT, PositionEnum.RIGHT].includes(props.tabPosition)) {
-        const { clientHeight, offsetTop } = activeRef.value;
-        const style: CSSProperties = {
-          width: `${props.activeBarSize}px`,
-          height: `${clientHeight}px`,
-          top: `${offsetTop}px`,
-          background: props.activeBarColor,
-        };
-        if (props.tabPosition === PositionEnum.LEFT) {
-          style.right = 0;
-        } else {
-          style.left = 0;
-        }
-        return style;
-      }
-      if (props.type === TabTypeEnum.UNBORDER_CARD) {
+      if (props.type === TabTypeEnum.UNDERLINE) {
         const { clientWidth, offsetLeft } = activeRef.value;
-        return {
+        Object.assign(initStyle, {
           width: `${clientWidth}px`,
           height: `${props.activeBarSize}px`,
           left: `${offsetLeft}px`,
           bottom: 0,
           background: props.activeBarColor,
-        };
+        });
       }
       return initStyle;
     });
@@ -185,31 +175,27 @@ export default defineComponent({
     };
   },
   render() {
-    const { active, closable, addable, sortable, sortType, labelHeight, dragstart, dragenter, dragend, drop } = this;
+    const { active, closable, sortable, sortType, dragstart, dragenter, dragend, drop } = this;
     const renderNavs = () =>
       this.navs.map((item, index) => {
         if (!item) {
           return null;
         }
         const { name, disabled, tabLabel } = item;
-        const getNavItemClass = () => {
-          const classNames = [this.resolveClassName('tab-header-item')];
-          if (disabled) {
-            classNames.push(this.resolveClassName('tab-header--disabled'));
-          }
-          if (active === name) {
-            classNames.push(this.resolveClassName('tab-header--active'));
-          }
-          return classNames.join(' ');
-        };
         const getValue = (curentValue, parentValue) => !disabled && (curentValue || parentValue);
         return (
           <div
+            ref={active === name ? 'activeRef' : ''}
+            v-bk-tooltips={{ content: item.tips || '', disabled: !item.tips }}
+            class={{
+              [this.resolveClassName('tab-header-item')]: true,
+              [this.resolveClassName('tab-header--disabled')]: disabled,
+              'is-active': active === name,
+            }}
             key={name}
             onClick={() => !disabled && this.handleTabChange(name)}
             draggable={getValue(item.sortable, sortable)}
             onDragstart={e => dragstart(index, e)}
-            ref={active === name ? 'activeRef' : ''}
             onDragenter={e => {
               e.preventDefault();
               dragenter(index);
@@ -228,8 +214,6 @@ export default defineComponent({
               e.preventDefault();
               drop(index, sortType);
             }}
-            class={getNavItemClass()}
-            v-bk-tooltips={{ content: item.tips, disabled: !item.tips }}
           >
             <div>{tabLabel}</div>
             {getValue(item.closable, closable) ? (
@@ -245,65 +229,41 @@ export default defineComponent({
           </div>
         );
       });
+
     const renderOperation = () => {
-      const list = [];
-      if (typeof this.$slots.add === 'function') {
-        list.push(this.$slots.add?.(h));
-      } else if (addable) {
-        list.push(
-          <div onClick={this.handleTabAdd}>
+      if (this.$slots.add) {
+        return <div class={this.resolveClassName('tab-header-operation')}>{this.$slots.add(h)}</div>;
+      }
+      if (this.addable) {
+        return (
+          <div
+            class={this.resolveClassName('tab-header-operation')}
+            onClick={this.handleTabAdd}
+          >
             <Plus
               style='display:flex;'
               width={26}
               height={26}
             />
-          </div>,
-        );
-      }
-      if (list.length) {
-        return (
-          <div class={this.resolveClassName('tab-header-operation')}>
-            {list.map((item, index) => (
-              <div
-                class={this.resolveClassName('tab-header-item')}
-                key={index}
-              >
-                {item}
-              </div>
-            ))}
           </div>
         );
       }
       return null;
     };
-    const renderActiveBar = () => {
-      if (this.type === TabTypeEnum.UNBORDER_CARD) {
-        return (
-          <div
-            style={this.activeBarStyle}
-            class={this.resolveClassName('tab-header-active-bar')}
-          />
-        );
-      }
-      return '';
-    };
-    const setting =
-      typeof this.$slots.setting === 'function' ? (
-        <div class={this.resolveClassName('tab-header-setting')}>{this.$slots.setting()}</div>
-      ) : null;
-    const operations = renderOperation();
 
     return (
-      <div
-        style={{ lineHeight: `${labelHeight}px` }}
-        class={this.resolveClassName('tab-header')}
-      >
-        <div class={[this.resolveClassName('tab-header-nav'), operations || setting ? 'tab-header-auto' : '']}>
-          {renderActiveBar()}
+      <div class={[this.resolveClassName('tab-header'), `is-${this.tabPosition}`]}>
+        <div class={this.resolveClassName('tab-header-nav')}>
+          {this.type === TabTypeEnum.UNDERLINE && this.tabPosition === 'top' && (
+            <div
+              style={this.activeBarStyle}
+              class={this.resolveClassName('tab-header-active-bar')}
+            />
+          )}
           {renderNavs()}
         </div>
-        {operations}
-        {setting}
+        {renderOperation()}
+        {this.$slots.setting && <div class={this.resolveClassName('tab-header-setting')}>{this.$slots.setting()}</div>}
       </div>
     );
   },

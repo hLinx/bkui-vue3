@@ -32,13 +32,15 @@ import {
   getCurrentInstance,
   onMounted,
   onUpdated,
+  provide,
   ref,
   VNode,
 } from 'vue';
 
 import { usePrefix } from '@bkui-vue/config-provider';
 
-import { PositionEnum, SortTypeEnum, tabProps, TabTypeEnum } from './props';
+import { tabKey } from './common';
+import { SortTypeEnum, tabProps } from './props';
 import TabNav from './tab-nav';
 
 export default defineComponent({
@@ -66,6 +68,7 @@ export default defineComponent({
     const isMounted = ref(false);
     const panels = ref([]);
     const instance = getCurrentInstance();
+
     // 动态插入tabPanel
     const getPaneInstanceFromSlot = (vnode: VNode, panelInstanceList: ComponentInternalInstance[] = []) => {
       const { children } = vnode;
@@ -93,13 +96,13 @@ export default defineComponent({
       }
     };
 
+    provide(tabKey, {
+      register() {
+        console.log('asdas');
+      },
+    });
+
     onMounted(() => {
-      /* 如果是列表模式，直接渲染
-      if (props.panels?.length) {
-        panels.value = props.panels;
-        return;
-      }
-      */
       setPanelInstances();
       isMounted.value = true;
       onUpdated(() => {
@@ -163,18 +166,6 @@ export default defineComponent({
     };
   },
   render() {
-    const getTabBoxClass = () => {
-      const arr = [this.resolveClassName('tab'), this.extCls];
-      if (this.tabPosition === PositionEnum.TOP) {
-        arr.push(this.resolveClassName(`tab--${this.tabPosition}`), this.resolveClassName(`tab--${this.type}`));
-      } else {
-        arr.push(this.resolveClassName(`tab--${this.tabPosition}`));
-        if (this.type === TabTypeEnum.CARD_TAB) {
-          arr.push(this.resolveClassName('tab--vertical-tab'));
-        }
-      }
-      return arr;
-    };
     const getTabHeader = () => {
       const {
         panels,
@@ -192,7 +183,6 @@ export default defineComponent({
         tabPosition,
         activeBarSize,
         activeBarColor,
-        // function
         tabAdd,
         tabChange,
         tabRemove,
@@ -215,7 +205,6 @@ export default defineComponent({
         tabPosition,
         activeBarSize,
         activeBarColor,
-        // function
         tabAdd,
         tabChange,
         tabRemove,
@@ -234,9 +223,9 @@ export default defineComponent({
     };
 
     return (
-      <div class={getTabBoxClass()}>
+      <div class={[this.resolveClassName('tab'), this.resolveClassName(`tab--${this.type}`), `is-${this.tabPosition}`]}>
         {getTabHeader()}
-        <div class={this.resolveClassName('tab-content')}>{this.$slots.default?.()}</div>
+        <div class={[this.resolveClassName('tab-content'), `is-${this.tabPosition}`]}>{this.$slots.default?.()}</div>
       </div>
     );
   },

@@ -1,8 +1,39 @@
 <template>
-  <div style="padding: 10px 20px;background: #f5f7fa;">
+  <div>
+    <div style="margin-bottom: 15px;">
+      <div>
+        选项卡样式:
+      </div>
+      <bk-radio-group v-model="currentType">
+        <bk-radio-button
+          v-for="item in type"
+          :key="item"
+          :label="item"
+          :value="item"
+        >
+          {{ item }}
+        </bk-radio-button>
+      </bk-radio-group>
+    </div>
+    <div style="margin-bottom: 15px;">
+      <div>
+        top position:
+      </div>
+      <bk-radio-group v-model="currentTopPosition">
+        <bk-radio-button
+          v-for="item in topPosition"
+          :key="item"
+          :label="item"
+          :value="item"
+        >
+          {{ item }}
+        </bk-radio-button>
+      </bk-radio-group>
+    </div>
     <bk-tab
       v-model:active="active"
-      type="card-tab"
+      :type="currentType"
+      :tabPosition="currentTopPosition"
     >
       <bk-tab-panel
         v-for="(item,index) in panels"
@@ -17,8 +48,8 @@
 </template>
 <script>
   import { defineComponent } from 'vue';
+
   export default defineComponent({
-    components: {},
     data() {
       return {
         panels: [
@@ -28,6 +59,10 @@
           { name: 'deleted', label: '已归档加速任务', count: 40 },
         ],
         active: 'mission',
+        currentType: 'card',
+        currentTopPosition: 'top',
+        type: ['card', 'card-tab', 'unborder-card', 'card-grid'],
+        topPosition: ['top', 'right', 'left']
       };
     },
   });
