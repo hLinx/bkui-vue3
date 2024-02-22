@@ -2,7 +2,7 @@
   <div>
     <bk-tab
       v-model:active="active"
-      type="card"
+      type="border-block"
       addable
     >
       <template #add>

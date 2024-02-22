@@ -95,7 +95,7 @@ export default defineComponent({
           <h2>基础用法</h2>
           <div class='mb20'>基础的、简洁的标签页。</div>
           <BkTab
-            type='unborder-card'
+            type='underline'
             v-model={[this.active, 'active']}
           >
             {panels}
@@ -112,7 +112,7 @@ export default defineComponent({
           <h2>选项卡样式</h2>
           <div class='mb20'>基础的、简洁的标签页。</div>
           <BkTab
-            type='card'
+            type='border-block'
             v-model={[this.active, 'active']}
           >
             {panels}
@@ -122,7 +122,7 @@ export default defineComponent({
           <h2>卡片样式</h2>
           <div class='mb20'>基础的、简洁的标签页。</div>
           <BkTab
-            type='border-card'
+            type='contrast'
             v-model={[this.active, 'active']}
           >
             {panels}

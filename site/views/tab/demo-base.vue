@@ -2,7 +2,6 @@
   <div>
     <bk-tab
       v-model:active="active"
-      type="unborder-card"
     >
       <bk-tab-panel
         v-for="(item,index) in panels"

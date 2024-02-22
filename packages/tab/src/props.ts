@@ -29,9 +29,12 @@ import { toType } from 'vue-types';
 import { PropTypes, renderDirectiveType } from '@bkui-vue/shared';
 
 export enum TabTypeEnum {
-  CARD = 'card',
-  BORDER_CARD = 'border-card',
-  UNBORDER_CARD = 'unborder-card',
+  UNDERLINE = 'underline',
+  OVERLINE = 'overline',
+  BORDER_BLOCK = 'border-block',
+  CONTRAST = 'contrast',
+  CONTRAST_BLOCK = 'contrast-block',
+  CAPSULE = 'capsule',
   CARD_TAB = 'card-tab',
   CARD_GRID = 'card-grid',
 }
@@ -115,13 +118,13 @@ export type TabPanelProps = ExtractPropTypes<typeof tabPanelProps>;
 
 export const tabProps = {
   active: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def(''),
-  type: toType<`${TabTypeEnum}`>('type', {}).def(TabTypeEnum.BORDER_CARD),
+  type: toType<`${TabTypeEnum}`>('type', {}).def(TabTypeEnum.UNDERLINE),
   tabPosition: TabPositionType,
   closable: Boolean,
   addable: Boolean,
   sortable: Boolean,
   sortType: SortTypeUnion,
-  labelHeight: PropTypes.number.def(50),
+  labelHeight: PropTypes.number.def(40),
   scrollStep: PropTypes.number.def(200),
   extCls: PropTypes.string.def(''),
   validateActive: PropTypes.bool.def(true),
@@ -134,7 +137,7 @@ export const tabProps = {
 
 export const tabNavProps = {
   active: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def(''),
-  type: toType<`${TabTypeEnum}`>('type', {}).def(TabTypeEnum.BORDER_CARD),
+  type: toType<`${TabTypeEnum}`>('type', {}).def(TabTypeEnum.UNDERLINE),
   activeBarColor: PropTypes.string.def('#3a84ff'),
   activeBarSize: PropTypes.number.def(2),
   panels: {

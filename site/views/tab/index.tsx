@@ -36,8 +36,8 @@ import { resolvePropsToDesData } from '../utils';
 import DemoAdd from './demo-add.vue';
 import DemoBase from './demo-base.vue';
 import CardDemo from './demo-card.vue';
-import DemoCardGrid from './demo-card-grid.vue';
-import DemoCardTab from './demo-card-tab.vue';
+// import DemoCardGrid from './demo-card-grid.vue';
+// import DemoCardTab from './demo-card-tab.vue';
 import DemoDrag from './demo-drag.vue';
 import DemoExtend from './demo-extend.vue';
 import DemoJsx from './demo-jsx';
@@ -102,30 +102,6 @@ export default defineComponent({
           demoName='demo-card'
         >
           <CardDemo />
-        </DemoBox>
-        <DemoBox
-          title='标签样式 '
-          desc='通过配置 type 属性，设置选项卡样式。支持的属性有 card, border-card, unborder-card, vertical-card card-grid'
-          componentName='tab'
-          demoName='demo-card-tab'
-        >
-          <DemoCardTab />
-        </DemoBox>
-        <DemoBox
-          title='card-grid'
-          desc='通过配置 type 属性，设置选项卡样式。支持的属性有 card, border-card, unborder-card, vertical-card card-grid'
-          componentName='tab'
-          demoName='demo-card-grid'
-        >
-          <DemoCardGrid />
-        </DemoBox>
-        <DemoBox
-          title='选项卡位置'
-          desc='通过配置 tab-position 属性，设置选项卡位置。支持的属性有 left, right, top。当 tab-position 属性配置为 left 和 right 时，addable 属性以及 closable 属性无效。'
-          componentName='tab'
-          demoName='demo-position'
-        >
-          <DemoPosition />
         </DemoBox>
         <DemoBox
           title='可增删的选项卡'
