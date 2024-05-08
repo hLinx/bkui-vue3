@@ -37,5 +37,9 @@ export default {
   max: (value: number, max: number): boolean => max >= value,
   email: (value: string): boolean => /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(value),
   maxlength: (value: string, maxlength: number): boolean => value.length <= maxlength,
-  pattern: (value: string, pattern: RegExp): boolean => pattern.test(value),
+  pattern: (value: string, pattern: RegExp): boolean => {
+    const result = pattern.test(value);
+    pattern.lastIndex = 0;
+    return result;
+  },
 };
