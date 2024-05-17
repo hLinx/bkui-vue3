@@ -72,6 +72,7 @@ export const useRadio = () => {
   const isGroup = !isEmptyObj(radioGroup);
 
   const isChecked = ref<boolean>(false);
+  const isPrechecking = ref(false);
   const size = ref('default');
 
   // 禁用状态
@@ -115,33 +116,43 @@ export const useRadio = () => {
 
   // 值更新
   const handleChange = (event: Event) => {
-    if (isDisabled.value) {
+    if (isDisabled.value || isPrechecking.value) {
       return;
     }
 
     const $targetInput = event.target as HTMLInputElement;
     const newValue = $targetInput.checked;
     const beforeChangeValue = props.beforeChange?.(newValue, event, props) ?? true;
-    Promise.resolve(beforeChangeValue).then(result => {
-      if (result) {
-        isChecked.value = $targetInput.checked;
+    Promise.resolve(beforeChangeValue)
+      .then(result => {
+        if (result) {
+          isChecked.value = $targetInput.checked;
 
-        const nextValue = isChecked.value ? props.label : '';
-        emit('update:modelValue', nextValue);
-        emit('change', nextValue);
-        // 更新 radio-group
-        if (isGroup) {
-          radioGroup.handleChange(currentInstance.proxy as IRadioInstance);
+          const nextValue = isChecked.value ? props.label : '';
+          emit('update:modelValue', nextValue);
+          emit('change', nextValue);
+          // 更新 radio-group
+          if (isGroup) {
+            radioGroup.handleChange(currentInstance.proxy as IRadioInstance);
+          }
+
+          nextTick(() => {
+            // 选中状态保持同步
+            if ($targetInput.checked !== isChecked.value) {
+              $targetInput.checked = isChecked.value;
+            }
+          });
+          return Promise.resolve(true);
         }
 
-        nextTick(() => {
-          // 选中状态保持同步
-          if ($targetInput.checked !== isChecked.value) {
-            $targetInput.checked = isChecked.value;
-          }
-        });
-      }
-    });
+        return Promise.reject();
+      })
+      .catch(() => {
+        $targetInput.checked = isChecked.value;
+      })
+      .finally(() => {
+        isPrechecking.value = false;
+      });
   };
 
   onMounted(() => {
