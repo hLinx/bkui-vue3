@@ -32,9 +32,11 @@ import PropsBox from '../../../components/props-box';
 import { IPropsTableItem } from '../../../typings';
 
 import BaseDemo from './base-demo.vue';
+import BaselineTimeDemo from './baseline-time-demo.vue';
 import SimpleDemo from './simple-demo.vue';
 import TimeDemo from './time-demo.vue';
 import TimezoneDemo from './timezone-demo.vue';
+import ValidateDemo from './validate-demo.vue';
 const menuPropsJson: IPropsTableItem[] = [
   {
     name: 'behavior',
@@ -83,6 +85,13 @@ const menuPropsJson: IPropsTableItem[] = [
     type: 'string',
     default: '浏览器时区',
     desc: '时区值',
+    optional: [],
+  },
+  {
+    name: 'validDateRange',
+    type: '[string,string]',
+    default: '',
+    desc: '有效可选的日期范围',
     optional: [],
   },
   {
@@ -214,6 +223,24 @@ export default defineComponent({
           demoName='timezone-demo'
         >
           <TimezoneDemo />
+        </DemoBox>
+        <DemoBox
+          title='基于某个时间点的最近时段'
+          subtitle='配置基准时间点'
+          desc='基于某个时间点的最近时段'
+          componentName='blueking/date-picker'
+          demoName='baseline-time-demo'
+        >
+          <BaselineTimeDemo />
+        </DemoBox>
+        <DemoBox
+          title='可选时间段配置'
+          subtitle='通过validDateRange属性来配置有效可选的日期范围'
+          desc='有效可选的日期范围'
+          componentName='blueking/date-picker'
+          demoName='validate-demo'
+        >
+          <ValidateDemo />
         </DemoBox>
         <DemoBox
           title='展示风格'

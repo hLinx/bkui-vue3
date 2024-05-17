@@ -1,87 +1,19 @@
 ## 更新日志
 
-### 1.0.3-beta.68.dialog.3
+### 1.0.3-beta.68
 
 * **[feat]**:
-    - feat(radio|table): 支持配置beforeChange & table修复column template渲染初始化
+    - feat(functional-dependecy): 修复业务组件体验问题
+    - bugfix(pop-confirm): title属性在有slot的时候失效 issue #1755
 
 
-### 1.0.3-beta.68.dialog.2
-
-* **[feat]**:
-    - feat(tree|radio): tree支持配置节点进入可视区域内回调&事件抛出 & radio支持配置beforeChange
-    - perf(dialog|sideslider|infobox): 代码调整
-
-
-### 1.0.3-beta.68.dialog.1
-
-* **[feat]**:
-    - bugfix: 修复scrollbar触摸板滑动X轴不生效
-
-
-### 1.0.3-beta.67.dialog.5
-
-* **[feat]**:
-    - perf(dialog|sideslider|infobox): 代码调整
-
-
-### 1.0.3-beta.67.dialog.4
-
-* **[feat]**:
-    - perf(dialog|sideslider|infobox): 代码调整
-
-
-### 1.0.3-beta.67.dialog.3
-
-* **[feat]**:
-    - feat(slider): 增加label-click配置支持
-
-
-### 1.0.3-beta.67.dialog.1
-
-* **[feat]**:
-    - bugfix: overflow title计算文本溢出算法
-
-
-### 1.0.3-beta.66.dialog.4
+### 1.0.3-beta.67
 
 * **[feat]**:
     - feature(select): 去除滚动的动画
 
 
-### 1.0.3-beta.66.dialog.3
-
-* **[feat]**:
-    - bugfix: overflow title计算文本溢出算法
-
-
-### 1.0.3-beta.66.dialog.2
-
-* **[feat]**:
-    - perf(dialog|sideslider|infobox): 代码调整
-
-
-### 1.0.3-beta.65.dialog.1
-
-* **[feat]**:
-    - fix: 修复scrollbar keepalive保持组件滚动状态
-
-
-### 1.0.3-beta.62.dialog.2
-
-* **[feat]**:
-    - feat(table|tree): table支持shift多选 & tree增加checkStrictly
-    - feat: 修复构建icon问题
-
-
-### 1.0.3-beta.62.dialog.1
-
-* **[feat]**:
-    - feat(table|tree): table支持shift多选 & tree增加checkStrictly
-    - feat: 修复构建icon问题
-
-
-### 1.0.3-beta.61.dialog.1
+### 1.0.3-beta.66
 
 * **[feat]**:
     - feat(search-select): 支持自定义面板功能

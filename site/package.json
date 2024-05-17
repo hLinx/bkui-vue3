@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@blueking/date-picker": "~2.0.0-beta.8",
+    "@blueking/date-picker": "~2.0.0-beta.19",
+    "@blueking/functional-dependency": "~0.0.1-beta.8",
     "@blueking/log-search": "0.0.9-beta.1",
     "@blueking/magicbox-header": "~1.1.61",
     "@vitejs/plugin-vue": "~5.0.4",

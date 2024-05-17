@@ -26,11 +26,11 @@ import { ref } from 'vue';
 import DatePicker from '@blueking/date-picker';
 
 import '@blueking/date-picker/vue3/vue3.css';
-const recent = ref(['now-2d', 'now']);
-const future = ref(['now', 'now+2d']);
-const natural = ref(['now-1w/w', 'now-1w/w']);
-const range = ref(['2024-03-11 00:20:00', 'now']);
-const range2 = ref(['2024-03-11 00:20:00', '2024-06-11 00:20:00']);
+const recent = ref(['(now/d)-1d', '(now/d)']);
+const future = ref(['(now-1d/d)-1h', '(now-1d/d)']);
+const natural = ref(['(now-2d/d)-30m', '(now-2d/d)']);
+const range = ref(['(now-12d/d)-88m', '(now-12d/d)']);
+const range2 = ref(['(2024-03-11 00:20:00)-3d', '(2024-03-11 00:20:00)']);
 </script>
 <style>
 .common-picker {

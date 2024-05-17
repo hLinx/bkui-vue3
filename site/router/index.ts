@@ -750,6 +750,15 @@ const routes: RouteRecordRaw[] = [
     },
     component: () => import('../views/blueking/log-search/index'),
   },
+  {
+    path: '/bk/functional-deps',
+    name: 'FunctionalDeps',
+    meta: {
+      group: NavGroupMeta.Business,
+      navName: 'Functional Deps 功能依赖展示',
+    },
+    component: () => import('../views/blueking/functional-deps/index'),
+  },
 ];
 
 const router = createRouter({

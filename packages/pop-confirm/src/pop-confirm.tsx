@@ -76,6 +76,14 @@ export default defineComponent({
   },
 
   render() {
+    const titleRender = () => this.title ? (
+      <div class={`${this.resolveClassName('pop-confirm-title')}`}>
+        {this.icon ? <span class={`${this.resolveClassName('pop-confirm-icon')}`}>{this.icon}</span> : ''}
+        <span>{this.title}</span>
+      </div>
+    ) : (
+      ''
+    );
     return (
       <Popover
         ref='popoverRef'
@@ -91,17 +99,13 @@ export default defineComponent({
           content: () => (
             <div class={`${this.resolveClassName('pop-confirm')}`}>
               {typeof this.$slots.content === 'function' ? (
-                this.$slots.content()
+                <>
+                {titleRender()}
+                {this.$slots.content()}
+                </>
               ) : (
                 <>
-                  {this.title ? (
-                    <div class={`${this.resolveClassName('pop-confirm-title')}`}>
-                      {this.icon ? <span class={`${this.resolveClassName('pop-confirm-icon')}`}>{this.icon}</span> : ''}
-                      <span>{this.title}</span>
-                    </div>
-                  ) : (
-                    ''
-                  )}
+                  {titleRender()}
                   <div class={`${this.resolveClassName('pop-confirm-content')}`}>
                     {!this.title ? this.icon : ''}
                     {this.content}

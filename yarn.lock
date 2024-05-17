@@ -1060,10 +1060,15 @@
   resolved "https://mirrors.tencent.com/npm/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@blueking/date-picker@~2.0.0-beta.8":
-  version "2.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@blueking/date-picker/-/date-picker-2.0.0-beta.8.tgz#709c5d48bb2c73ee25ce2a3e5a9e204e27180c68"
-  integrity sha512-1WH2BVzuLRGv5bbiQGwP9YDqbKXfJuWpRKJ7otUfqCg8Z7tMlSv7OY04lX9AhypOhW2vj9gChIXmIjwK0UXbdQ==
+"@blueking/date-picker@~2.0.0-beta.19":
+  version "2.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@blueking/date-picker/-/date-picker-2.0.0-beta.19.tgz#eb2b5a47cc5646e54ec63edd7681043b8d62f464"
+  integrity sha512-WPEfvt2/KpQsHgyuHYuAkBugi39qNeUf9qjk3YQGFfgeoUCWx3NQcl6oLuaMhIEpqA6X+YZadSKdkScQlYYrjw==
+
+"@blueking/functional-dependency@~0.0.1-beta.8":
+  version "0.0.1-beta.8"
+  resolved "https://registry.yarnpkg.com/@blueking/functional-dependency/-/functional-dependency-0.0.1-beta.8.tgz#3e33cae3d836591d506d6d846be4c19e72138c6a"
+  integrity sha512-hMX8CeinyrBk1l/U4Z76RoxuKPJbHwiXdnzaTgQYhPnqrpHlD2uprkxqpk8gQokR/FaMjdBjkW3FDK2D2Pea+g==
 
 "@blueking/log-search@0.0.9-beta.1":
   version "0.0.9-beta.1"

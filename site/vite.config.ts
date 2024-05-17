@@ -41,6 +41,10 @@ export default defineConfig({
         replacement: resolve(__dirname, '../packages/bkui-vue/index.ts'),
       },
       {
+        find: 'bkui-vue/lib/icon',
+        replacement: resolve(__dirname, '../packages/icon/src/index.tsx'),
+      },
+      {
         find: 'bkui-vue/lib/directives', // 老版本构建 后面业务组件升级后去除
         replacement: resolve(__dirname, '../packages/bkui-vue/index.ts'),
       },
